@@ -1,65 +1,99 @@
 <!doctype html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <title>Rahul Singh Parmar </title>
-    <link rel="stylesheet" href="style.css">
-
-</head>
-
-<body>
-   <div class ="clock">
-      <div class ="hour">
-         <div class ="hr" id="hr"></div>
-      </div>
-      <div class ="min">
-         <div class ="mn" id="mn"></div>
-      </div>
-      <div class ="sec">
-         <div class ="sc" id="sc"></div>
-      </div>
-      <div id="holder">
-         <a href="watch.html" title="Toggle dark mode" class="hvcentered">
-            
-            <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" height="3em" width="3em"
-               xmlns="http://www.w3.org/2000/svg">
-               <path fill="none" stroke-linecap="round" stroke-miterlimit="10" stroke-width="32"
-                  d="M256 48v48m0 320v48m147.08-355.08l-33.94 33.94M142.86 369.14l-33.94 33.94M464 256h-48m-320 0H48m355.08 147.08l-33.94-33.94M142.86 142.86l-33.94-33.94">
-               </path>
-               <circle cx="256" cy="256" r="80" fill="none" stroke-linecap="round" stroke-miterlimit="10" stroke-width="32">
-               </circle>
-            </svg>
-         </a>
-      </div>
-   </div>
-   
-  <script type="text/javascript">
-    const deg =6;
-    const hr = document.querySelector("#hr");
-    const mn = document.querySelector("#mn");
-    const sc = document.querySelector("#sc");
-
-    setInterval(() => {
-      let day = new Date();
-      let hh = day.getHours() * 30;
-      let mm = day.getMinutes() * deg;
-      let ss = day.getSeconds() * deg;
-
-      hr.style.transform = `rotateZ(${(hh)+(mm/12)}deg)`;
-      mn.style.transform = `rotateZ(${mm}deg)`;
-      sc.style.transform = `rotateZ(${ss}deg)`;
-    })
-
-  </script>
-
-<!--  button
-<div id="button"><a href="watch2.html">
-   <button class="button"> Light Mode </button>
-   
-</a></div>
--->
-
-
-
-</body>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="A considered space for time. An accessible analog clock, timezone dashboard and vanilla JavaScript frontend showcase by Rahul Singh Parmar."
+    />
+    <meta name="theme-color" content="#f3f1e9" />
+    <title>Tempo — A considered space for time</title>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="style.css" />
+    <script type="module" src="clock.js"></script>
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to clock</a>
+    <div class="shell">
+      <header class="topbar">
+        <a class="brand" href="./" aria-label="Tempo home"
+          ><span class="brand-mark" aria-hidden="true">◷</span> tempo<span class="brand-dot"
+            >.</span
+          ></a
+        >
+        <span class="edition">A CONSIDERED SPACE FOR TIME</span>
+        <label class="theme-label"
+          >Appearance
+          <select id="theme">
+            <option value="light">Light</option>
+            <option value="dark">Dark</option>
+            <option value="system">System</option>
+          </select></label
+        >
+      </header>
+      <main id="main">
+        <div class="intro">
+          <p class="eyebrow"><span class="status-dot"></span> THE PRESENT MOMENT</p>
+          <p class="issue">NO. 001 / EVERY SECOND COUNTS</p>
+        </div>
+        <section class="hero" aria-labelledby="title">
+          <div class="clock-stage">
+            <span class="stage-label">ANALOG / <span id="zone-short">LOCAL TIME</span></span>
+            <div class="dial" aria-hidden="true">
+              <div id="ticks"></div>
+              <div id="numbers"></div>
+              <div class="dial-wordmark">TEMPO<span>TAKE YOUR TIME</span></div>
+              <div class="hand hour" id="hour-hand"></div>
+              <div class="hand minute" id="minute-hand"></div>
+              <div class="hand second" id="second-hand"></div>
+              <div class="pin"></div>
+            </div>
+            <p class="stage-foot">
+              <span>DESIGNED TO SLOW YOU DOWN</span><span>60 / 60 / 24</span>
+            </p>
+          </div>
+          <div class="time-panel">
+            <p class="eyebrow">YOUR CORNER OF THE WORLD</p>
+            <h1 id="title">Make time<br />for <em>right now.</em></h1>
+            <div class="digital">
+              <time id="time" datetime="">--:--:--</time><span id="period"></span>
+            </div>
+            <p id="date" class="date">Loading your local time…</p>
+            <div class="controls">
+              <label for="timezone">TIMEZONE <span aria-hidden="true">↗</span></label
+              ><select id="timezone"></select>
+              <div class="switch-row">
+                <label for="format">24-hour time</label
+                ><input type="checkbox" role="switch" id="format" checked />
+              </div>
+              <div class="switch-row">
+                <label for="smooth">Sweeping second hand</label
+                ><input type="checkbox" role="switch" id="smooth" />
+              </div>
+              <p class="hint" id="motion-note">A quiet tick, once a second.</p>
+            </div>
+          </div>
+        </section>
+        <section class="world" aria-labelledby="world-title">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">SAME MOMENT, DIFFERENT PLACES</p>
+              <h2 id="world-title">Elsewhere in the world<span>.</span></h2>
+            </div>
+            <button id="add-zone" type="button">+ Pin selected timezone</button>
+          </div>
+          <p class="sr-only" role="status" id="notice"></p>
+          <div id="world-clocks" class="world-grid"></div>
+        </section>
+      </main>
+      <footer>
+        <p>A little perspective, one second at a time.</p>
+        <div>
+          BUILT BY <a href="https://github.com/RahulSinghParmar">RAHUL SINGH PARMAR</a>
+          <span>↗</span><a href="https://github.com/RahulSinghParmar/css_clock">SOURCE</a>
+        </div>
+      </footer>
+    </div>
+  </body>
 </html>
