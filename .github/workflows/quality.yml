@@ -42,7 +42,7 @@ jobs:
       - uses: actions/configure-pages@v5
       - name: Package public site only
         run: mkdir site && cp index.html style.css tokens.css clock.js time.js favicon.svg watch.html site/
-      - uses: actions/upload-pages-artifact@v3
+      - uses: actions/upload-pages-artifact@v5
         with:
           path: site
       - uses: actions/deploy-pages@v4
