@@ -39,7 +39,7 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/configure-pages@v5
+      - uses: actions/configure-pages@v6
       - name: Package public site only
         run: mkdir site && cp index.html style.css tokens.css clock.js time.js favicon.svg watch.html site/
       - uses: actions/upload-pages-artifact@v3
